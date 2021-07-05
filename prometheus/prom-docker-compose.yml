@@ -6,7 +6,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - "prometheus_home:/etc/prometheus"
+      - "/mnt:/etc/prometheus"
 
-volumes:
-  prometheus_home:
+#volumes:
+##  prometheus_home:
