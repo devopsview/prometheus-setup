@@ -4,6 +4,11 @@ services:
   prometheus:
     image: prom/prometheus
     network_mode: host
+    volumes:
+      - /mnt/prometheus_conf:/etc/prometheus
+      - /mnt/prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
     restart: unless-stopped
 
 
