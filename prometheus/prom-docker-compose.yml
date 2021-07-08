@@ -4,3 +4,7 @@ services:
   prometheus:
     image: prom/prometheus
     network_mode: host
+
+  alertmanager:
+    image: prom/alertmanager
+    network_mode: host
