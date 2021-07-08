@@ -5,8 +5,3 @@ services:
     image: prom/prometheus
     ports:
       - "9090:9090"
-#    volumes:
-#      - "/mnt:/etc/prometheus"
-
-#volumes:
-##  prometheus_home:
