@@ -23,7 +23,7 @@ receivers:
 
 - name: slack_alerts
   slack_configs:
-  - api_url: https://hooks.slack.com/services/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
+  - api_url: slack.webhook.url
     channel: '#prometheus-alerts'
     title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] DevOpsInSight Alert'
     text: >-
