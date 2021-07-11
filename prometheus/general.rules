@@ -1,0 +1,34 @@
+groups:
+- name: general_rules.rules
+  rules:
+  - alert: LowDiskSpace_Warning
+    expr: 100 -(node_filesystem_avail_bytes / node_filesystem_size_bytes * 100) >= 30
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: The Free Disk space left for '{{$labels.mountpoint}}' is under
+        {{$value}} % , ssh into box and clear logs
+      impact: Server is about to run out of  Disk space
+      summary: Low Disk space free  alarm for {{$labels.instance}}
+
+  - alert: LowDiskSpace_Critical
+    expr: 100 -(node_filesystem_avail_bytes / node_filesystem_size_bytes * 100) >= 35
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      description: The Free Disk space left for '{{$labels.mountpoint}}' is under
+        {{$value}} % , ssh into box and clear logs
+      impact: Server is about to run out of  Disk
+      summary: Low Disk space free  alarm for {{$labels.instance}}
+
+  - alert: ServerIsDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      description: The Server is Stopped or Terminated by user
+      impact: you application is down now
+      summary: Server is down for {{$labels.instance}}
