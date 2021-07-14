@@ -32,3 +32,24 @@ groups:
       description: The Server is Stopped or Terminated by user
       impact: you application is down now
       summary: Server is down for {{$labels.instance}}
+      
+  - alert: LowFreeMemory
+    expr: round( node_memory_MemAvailable_bytes  / node_memory_MemTotal_bytes * 100) < 30
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: The Free Memory has dropped below {{$value}} % for more than 1m
+      impact: Server Performance might be degraded
+      summary: 'Low Free Memory Detected for : {{$labels.instance}}'
+
+  - alert: HighCpuUsage
+    expr: (100 - avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) BY (instance) * 100) > 90
+    for: 15m
+    labels:
+      severity: critical
+    annotations:
+      description: The CPU usage has been high with value of {{$value}} for more than
+        10m
+      impact: Server Performance might be degraded
+      summary: 'High CPU Usage Detected for : {{$labels.instance}}'
